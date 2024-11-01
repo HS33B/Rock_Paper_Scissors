@@ -4,9 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROCK PAPER SCISSORS</title>
-    <script src="javascript.js"></script>
 </head>
 <body>
-    
+    <button class="btn1" id="rock" style="margin-bottom: 10px;">ROCK</button>
+    <button class="btn2" id="paper" style="margin-bottom: 10px;">PAPER</button>
+    <button class="btn3" id="scissors" style="margin-bottom: 10px;">SCISSORS</button>
+    <div id="compResult"></div>
+    <div id="humanResult"></div>
+    <div id="fResult"></div>
+    <div id="score"></div>
 </body>
+<script>
+    const btn1 = document.querySelector(".btn1");
+    const btn2 = document.querySelector(".btn2");
+    const btn3 = document.querySelector(".btn3");
+    const compResult = document.querySelector("#compResult");
+    const humanResult = document.querySelector("#humanResult");
+    const fResult = document.querySelector("#fResult");
+    const scoreDiv = document.querySelector("#score");
+
+    let compChoice = '';
+    let humanChoice = '';
+    let wins = 0;
+    let losses = 0;
+    let roundsPlayed = 0;
+    const totalRounds = 5;
+
+    function getCompChoice() {
+        let x = Math.random() * 100;
+        if (x <= 33) {
+            compChoice = "ROCK";
+        } else if (x <= 66) {
+            compChoice = "PAPER";
+        } else {
+            compChoice = "SCISSORS";
+        }
+        compResult.textContent = 'Comp Chose: ' + compChoice;
+    }
+
+    function playRound() {
+        let result = '';
+        if (humanChoice === compChoice) {
+            result = 'THAT\'S A DRAW!';
+            fResult.textContent = result;
+            return; // Don't count draws
+        } 
+        else if (
+            (humanChoice === 'ROCK' && compChoice === 'SCISSORS') ||
+            (humanChoice === 'PAPER' && compChoice === 'ROCK') ||
+            (humanChoice === 'SCISSORS' && compChoice === 'PAPER')
+        ) {
+            result = 'YOU WON!';
+            wins++;
+        } else {
+            result = 'YOU LOST!';
+            losses++;
+        }
+        fResult.textContent = result;
+        roundsPlayed++;
+        scoreDiv.textContent = `Wins: ${wins}, Losses: ${losses}`;
+
+        // Check if game is over
+        if (roundsPlayed >= totalRounds) {
+            if (wins > losses) {
+                alert('GAME OVER! YOU WON!');
+            } else if (losses > wins) {
+                alert('GAME OVER! YOU LOST!');
+            } else {
+                alert('GAME OVER! IT\'S A DRAW!');
+            }
+            resetGame();
+        }
+    }
+
+    function resetGame() {
+        wins = 0;
+        losses = 0;
+        roundsPlayed = 0;
+        scoreDiv.textContent = '';
+        fResult.textContent = '';
+        compResult.textContent = '';
+        humanResult.textContent = '';
+    }
+
+    btn1.addEventListener('click', () => {
+        if (roundsPlayed < totalRounds) {
+            humanChoice = 'ROCK';
+            humanResult.textContent = 'Human Chose: ROCK';
+            getCompChoice();
+            playRound();
+        }
+    });
+
+    btn2.addEventListener('click', () => {
+        if (roundsPlayed < totalRounds) {
+            humanChoice = 'PAPER';
+            humanResult.textContent = 'Human Chose: PAPER';
+            getCompChoice();
+            playRound();
+        }
+    });
+
+    btn3.addEventListener('click', () => {
+        if (roundsPlayed < totalRounds) {
+            humanChoice = 'SCISSORS';
+            humanResult.textContent = 'Human Chose: SCISSORS';
+            getCompChoice();
+            playRound();
+        }
+    });
+</script>
 </html>

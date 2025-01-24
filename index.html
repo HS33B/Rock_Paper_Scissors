@@ -6,14 +6,44 @@
     <title>ROCK PAPER SCISSORS</title>
 </head>
 <body>
-    <button class="btn1" id="rock" style="margin-bottom: 10px;">ROCK</button>
-    <button class="btn2" id="paper" style="margin-bottom: 10px;">PAPER</button>
-    <button class="btn3" id="scissors" style="margin-bottom: 10px;">SCISSORS</button>
-    <div id="compResult"></div>
-    <div id="humanResult"></div>
-    <div id="fResult"></div>
-    <div id="score"></div>
+    <div id="unidiv">
+        <button class="btn1" id="rock" style="margin-bottom: 30px;">ROCK</button>
+        <button class="btn2" id="paper" style="margin-bottom: 30px;">PAPER</button>
+        <button class="btn3" id="scissors" style="margin-bottom: 30px;">SCISSORS</button>
+    </div>
+    <div id="logicdiv">
+        <div id="fResult" style="margin-bottom: 10px;"></div>
+        <div id="humanResult"></div>
+        <div id="compResult"></div>
+        <div id="score" style="margin-top: 10px;"></div>
+    </div>
 </body>
+<style>
+    #unidiv{
+        display: flex;
+        justify-content: space-between;
+    }
+    button{
+        padding: 20px;
+        border-radius: 12px;
+        background-color: lightgray;
+        font-size: 20px;
+    }
+    button:hover{
+        background-color: darkgrey;
+    }
+    #logicdiv{
+        font-size: x-large;
+        justify-items: center;
+        margin-right: 45px;
+    }
+    #fResult{
+        color: purple;
+    }
+    #score{
+        color:green;
+    }
+</style>
 <script>
     const btn1 = document.querySelector(".btn1");
     const btn2 = document.querySelector(".btn2");
@@ -90,7 +120,7 @@
     btn1.addEventListener('click', () => {
         if (roundsPlayed < totalRounds) {
             humanChoice = 'ROCK';
-            humanResult.textContent = 'Human Chose: ROCK';
+            humanResult.textContent = 'You Chose: ROCK';
             getCompChoice();
             playRound();
         }
@@ -99,7 +129,7 @@
     btn2.addEventListener('click', () => {
         if (roundsPlayed < totalRounds) {
             humanChoice = 'PAPER';
-            humanResult.textContent = 'Human Chose: PAPER';
+            humanResult.textContent = 'You Chose: PAPER';
             getCompChoice();
             playRound();
         }
@@ -108,7 +138,7 @@
     btn3.addEventListener('click', () => {
         if (roundsPlayed < totalRounds) {
             humanChoice = 'SCISSORS';
-            humanResult.textContent = 'Human Chose: SCISSORS';
+            humanResult.textContent = 'You Chose: SCISSORS';
             getCompChoice();
             playRound();
         }
